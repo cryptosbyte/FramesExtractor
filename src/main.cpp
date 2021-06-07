@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <cstdio>
+#include <cstring>
 
 using namespace std;
 
@@ -25,10 +27,6 @@ int main(int argc, char *argv[])
     {
 
         const char *file_loc = argv[1];
-        char *frames = "1";
-
-        if (string(argv[2]) == "-i")
-            frames = argv[3];
 
         ifstream file(file_loc);
         if (!file.is_open())
@@ -37,9 +35,15 @@ int main(int argc, char *argv[])
             return -1;
         }
 
-        system("mkdir -p $HOME/extraction");
+        system("mkdir -p extraction");
 
-        system("ffmpeg -i %s -vf fps=%s $HOME/extraction/video_ext%06d" + file_loc + frames);
+        const size_t str_size = 53 + strlen(file_loc);
+        char *exec_str = new char[str_size];
+
+        snprintf(exec_str, str_size, "ffmpeg -i %s -vf fps=1 extraction/%03d.png", file_loc);
+        system(exec_str);
+
+        delete[] exec_str;
     };
 
     return 0;
