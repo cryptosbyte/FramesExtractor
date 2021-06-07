@@ -19,4 +19,4 @@ $ ./framer -h # or --help
 ```
 
 ### CALLING C++ DEVELOPERS! 
-### Error in src/main.cpp:42 ~ Need help with string interpolation 
+### Error with FFMPEG
